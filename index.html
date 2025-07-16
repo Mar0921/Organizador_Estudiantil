@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizador Estudiantil</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo">
+                <i class='bx bxs-graduation'></i>
+                <span>Organizador Estudiantil</span>
+            </div>
+            <nav class="main-nav">
+                <button class="nav-btn active" data-section="dashboard">
+                    <i class='bx bx-home'></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-btn" data-section="tasks">
+                    <i class='bx bx-task'></i>
+                    <span>Tareas</span>
+                </button>
+                <button class="nav-btn" data-section="notes">
+                    <i class='bx bx-note'></i>
+                    <span>Notas</span>
+                </button>
+                <button class="nav-btn" data-section="subjects">
+                    <i class='bx bx-book'></i>
+                    <span>Materias</span>
+                </button>
+                <button class="nav-btn" data-section="goals">
+                    <i class='bx bx-target-lock'></i>
+                    <span>Metas</span>
+                </button>
+            </nav>
+            <div class="user-menu">
+                <button class="user-btn">
+                    <i class='bx bx-user-circle'></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+            <div class="section-header">
+                <h1>Dashboard</h1>
+                <p>Resumen de tu actividad académica</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Quick Stats -->
+                <div class="card stats-card">
+                    <div class="card-header">
+                        <h3>Estadísticas Rápidas</h3>
+                        <i class='bx bx-bar-chart-alt-2'></i>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="pendingTasks">0</div>
+                            <div class="stat-label">Tareas Pendientes</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalSubjects">0</div>
+                            <div class="stat-label">Materias</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="activeGoals">0</div>
+                            <div class="stat-label">Metas Activas</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="averageGrade">0.0</div>
+                            <div class="stat-label">Promedio</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pomodoro Timer -->
+                <div class="card pomodoro-card">
+                    <div class="card-header">
+                        <h3>Temporizador Pomodoro</h3>
+                        <i class='bx bx-time'></i>
+                    </div>
+                    <div class="pomodoro-content">
+                        <div class="timer-display" id="timerDisplay">25:00</div>
+                        <div class="timer-progress">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        <div class="timer-controls">
+                            <button class="timer-btn" id="startBtn" onclick="startPomodoro()">
+                                <i class='bx bx-play'></i>
+                            </button>
+                            <button class="timer-btn" id="pauseBtn" onclick="pausePomodoro()">
+                                <i class='bx bx-pause'></i>
+                            </button>
+                            <button class="timer-btn" onclick="resetPomodoro()">
+                                <i class='bx bx-reset'></i>
+                            </button>
+                        </div>
+                        <div class="timer-settings">
+                            <label>
+                                Trabajo: <input type="number" id="workTime" value="25" min="1" max="60"> min
+                            </label>
+                            <label>
+                                Descanso: <input type="number" id="breakTime" value="5" min="1" max="30"> min
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Tasks -->
+                <div class="card recent-tasks-card">
+                    <div class="card-header">
+                        <h3>Tareas Recientes</h3>
+                        <i class='bx bx-list-ul'></i>
+                    </div>
+                    <div class="recent-tasks-list" id="recentTasksList">
+                        <div class="empty-state">
+                            <i class='bx bx-task'></i>
+                            <p>No hay tareas recientes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar -->
+                <div class="card calendar-card">
+                    <div class="card-header">
+                        <h3>Calendario</h3>
+                        <i class='bx bx-calendar'></i>
+                    </div>
+                    <div class="calendar-content">
+                        <iframe 
+                            src="https://calendar.google.com/calendar/embed?src=es-419%23week%40group.v.calendar.google.com&ctz=America%2FMexico_City"
+                            frameborder="0" 
+                            scrolling="no">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Spotify Player -->
+                <div class="card spotify-card">
+                    <div class="card-header">
+                        <h3>Música de Estudio</h3>
+                        <i class='bx bxl-spotify'></i>
+                    </div>
+                    <div class="spotify-content">
+                        <iframe 
+                            src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
+                            frameborder="0" 
+                            allow="encrypted-media">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tasks Section -->
+        <section id="tasks" class="content-section">
+            <div class="section-header">
+                <h1>Gestión de Tareas</h1>
+                <p>Organiza y controla tus tareas académicas</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Agregar Nueva Tarea</h3>
+                    <i class='bx bx-plus'></i>
+                </div>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Nombre de la tarea</label>
+                        <input type="text" id="taskName" placeholder="Ej: Estudiar para examen de matemáticas">
+                    </div>
+                    <div class="input-group">
+                        <label>Subtareas</label>
+                        <input type="text" id="subTasks" placeholder="Separadas por comas">
+                    </div>
+                    <div class="input-group">
+                        <label>Horas estimadas</label>
+                        <input type="number" id="taskHours" placeholder="0" min="0" step="0.5">
+                    </div>
+                    <div class="input-group">
+                        <label>Recordatorio</label>
+                        <input type="datetime-local" id="taskReminder">
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addTask()">
+                    <i class='bx bx-plus'></i>
+                    Agregar Tarea
+                </button>
+            </div>
+
+            <div class="tasks-grid" id="tasksList">
+                <!-- Tasks will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Notes Section -->
+        <section id="notes" class="content-section">
+            <div class="section-header">
+                <h1>Notas Rápidas</h1>
+                <p>Guarda tus ideas y apuntes importantes</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Agregar Nueva Nota</h3>
+                    <i class='bx bx-note'></i>
+                </div>
+                <div class="form-grid">
+                    <div class="input-group full-width">
+                        <label>Contenido de la nota</label>
+                        <textarea id="noteInput" placeholder="Escribe tu nota aquí..." rows="4"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Materia</label>
+                        <select id="notaMateria">
+                            <option value="">Selecciona una materia</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="agregarNota()">
+                    <i class='bx bx-plus'></i>
+                    Agregar Nota
+                </button>
+            </div>
+
+            <div class="notes-grid" id="notesList">
+                <!-- Notes will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Subjects Section -->
+        <section id="subjects" class="content-section">
+            <div class="section-header">
+                <h1>Gestión de Materias</h1>
+                <p>Administra tus materias y profesores</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Agregar Nueva Materia</h3>
+                    <i class='bx bx-book'></i>
+                </div>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Nombre de la materia</label>
+                        <input type="text" id="className" placeholder="Ej: Matemáticas Avanzadas">
+                    </div>
+                    <div class="input-group">
+                        <label>Nombre del profesor</label>
+                        <input type="text" id="classTeacher" placeholder="Ej: Dr. Juan Pérez">
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="createClass()">
+                        <i class='bx bx-plus'></i>
+                        Crear Materia
+                    </button>
+                    <button class="btn btn-secondary" onclick="limpiarClases()">
+                        <i class='bx bx-trash'></i>
+                        Limpiar Todo
+                    </button>
+                </div>
+            </div>
+
+            <div class="subjects-grid" id="clases-container">
+                <!-- Subjects will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Goals Section -->
+        <section id="goals" class="content-section">
+            <div class="section-header">
+                <h1>Metas Académicas</h1>
+                <p>Define y alcanza tus objetivos</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Agregar Nueva Meta</h3>
+                    <i class='bx bx-target-lock'></i>
+                </div>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Título de la meta</label>
+                        <input type="text" id="metaTitulo" placeholder="Ej: Obtener promedio de 9.0">
+                    </div>
+                    <div class="input-group">
+                        <label>Fecha límite</label>
+                        <input type="date" id="metaFechaLimite">
+                    </div>
+                    <div class="input-group full-width">
+                        <label>Descripción</label>
+                        <textarea id="metaDescripcion" placeholder="Describe tu meta..." rows="3"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Categoría</label>
+                        <select id="metaCategoria">
+                            <option value="academica">Académica</option>
+                            <option value="bienestar">Bienestar Personal</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="crearMeta()">
+                        <i class='bx bx-plus'></i>
+                        Crear Meta
+                    </button>
+                    <button class="btn btn-secondary" onclick="limpiarMetas()">
+                        <i class='bx bx-trash'></i>
+                        Limpiar Todo
+                    </button>
+                </div>
+            </div>
+
+            <div class="goals-grid" id="listaMetas">
+                <!-- Goals will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Notification Modal -->
+    <div id="notificationModal" class="notification-modal">
+        <div class="notification-content">
+            <div class="notification-header">
+                <i class='bx bx-bell'></i>
+                <h4>Recordatorio</h4>
+            </div>
+            <p id="notificationMessage"></p>
+            <button class="btn btn-primary" onclick="cerrarNotificacion()">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
